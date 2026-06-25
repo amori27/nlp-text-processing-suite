@@ -23,7 +23,7 @@ Production-ready NLP utilities for text processing including cleaning, tokenizat
 ## Installation
 
 ```bash
-git clone https://github.com/AmirAsaad/nlp-text-processing-suite.git
+git clone https://github.com/amori27/nlp-text-processing-suite.git
 cd nlp-text-processing-suite
 pip install -r requirements.txt
 python -m spacy download en_core_web_sm
