@@ -1,4 +1,6 @@
 # NLP Text Processing Suite
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 
 Comprehensive NLP toolkit featuring text preprocessing, sentiment analysis, named entity recognition (NER), text classification, and language processing pipelines.
 
