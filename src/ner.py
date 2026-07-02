@@ -35,12 +35,13 @@ class NERExtractor:
         """
         doc = self.nlp(text)
         entities = []
+        from spacy import explain
 
         for ent in doc.ents:
             entities.append({
                 "text": ent.text,
                 "label": ent.label_,
-                "label_description": self.nlp.entity.labels.get(ent.label_, "Unknown"),
+                "label_description": explain(ent.label_) or "Unknown",
                 "start": ent.start_char,
                 "end": ent.end_char
             })
