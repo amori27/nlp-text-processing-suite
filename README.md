@@ -1,82 +1,89 @@
 # NLP Text Processing Suite
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 
+A practical Python library for common NLP tasks: text preprocessing, sentiment analysis, and named entity recognition. Pluggable backends (TextBlob / VADER / spaCy / Transformers), no forced API keys.
 
-Comprehensive NLP toolkit featuring text preprocessing, sentiment analysis, named entity recognition (NER), text classification, and language processing pipelines.
+---
 
-## Description
+## Modules
 
-Production-ready NLP utilities for text processing including cleaning, tokenization, POS tagging, named entity recognition, and sentiment analysis. Built with NLTK, spaCy, and transformers.
+| Module | What it does |
+|---|---|
+| `preprocessor.TextPreprocessor` | Cleaning, normalization, stopword removal, tokenization |
+| `sentiment.SentimentAnalyzer` | Sentiment via TextBlob, VADER, or transformer models |
+| `ner.NERExtractor` | Named-entity extraction via spaCy (`en_core_web_sm` by default) |
 
-## Skills & Technologies
+---
 
-- Python 3.9+
-- spaCy
-- NLTK
-- Transformers (Hugging Face)
-- scikit-learn
-- TextBlob
-- Text Preprocessing
-- Sentiment Analysis
-- NER
-
-## Installation
+## Install
 
 ```bash
-git clone https://github.com/amori27/nlp-text-processing-suite.git
-cd nlp-text-processing-suite
 pip install -r requirements.txt
+python -m nltk.downloader stopwords vader_lexicon
 python -m spacy download en_core_web_sm
 ```
 
+---
+
 ## Usage
 
-### Text Preprocessing
+### Preprocessing
 
 ```python
 from src.preprocessor import TextPreprocessor
 
-preprocessor = TextPreprocessor()
-cleaned = preprocessor.clean_text("Hello! This is a TEST text with numbers 123.")
+p = TextPreprocessor(lowercase=True)
+
+text = "<p>Hello WORLD! Visit https://example.com</p>"
+clean = p.clean_text(text)             # "hello world visit"
+tokens = p.tokenize(clean)
+tokens = p.remove_stopwords(tokens)    # ["hello", "world", "visit"]
 ```
 
-### Sentiment Analysis
+### Sentiment
 
 ```python
 from src.sentiment import SentimentAnalyzer
 
-analyzer = SentimentAnalyzer()
-result = analyzer.analyze("I love this product, it's amazing!")
+analyzer = SentimentAnalyzer(method="textblob")   # or "vader" / "transformer"
+result = analyzer.analyze("I love this product, it works perfectly!")
+# -> {"polarity": 0.6, "subjectivity": 0.4, "label": "positive"}
 ```
 
-### Named Entity Recognition
+### Named-Entity Recognition
 
 ```python
 from src.ner import NERExtractor
 
-extractor = NERExtractor()
-entities = extractor.extract("Apple Inc. was founded by Steve Jobs in California.")
+ner = NERExtractor(model="en_core_web_sm")
+entities = ner.extract("Apple was founded by Steve Jobs in Cupertino in 1976.")
+# -> [{"text": "Apple", "label": "ORG", ...},
+#     {"text": "Steve Jobs", "label": "PERSON", ...},
+#     {"text": "Cupertino", "label": "GPE", ...}]
+
+# Filter by type
+people = ner.extract_by_type(text, ["PERSON"])
 ```
+
+---
 
 ## Project Structure
 
 ```
 nlp-text-processing-suite/
 ├── src/
-│   ├── preprocessor.py     # Text cleaning
-│   ├── sentiment.py        # Sentiment analysis
-│   ├── ner.py              # Named entity recognition
-│   └── tokenizer.py        # Tokenization
+│   ├── preprocessor.py
+│   ├── sentiment.py
+│   └── ner.py
 ├── requirements.txt
+├── LICENSE
 └── README.md
 ```
 
-## References
-
-- [spaCy Documentation](https://spacy.io/docs)
-- [NLTK Documentation](https://www.nltk.org/docs/)
-- [Hugging Face Transformers](https://huggingface.co/docs/transformers/)
+---
 
 ## License
 
-MIT License
+MIT — see [LICENSE](LICENSE).
