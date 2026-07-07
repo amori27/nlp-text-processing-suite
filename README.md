@@ -1,8 +1,5 @@
 # NLP Text Processing Suite
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
-
 A practical Python library for common NLP tasks: text preprocessing, sentiment analysis, and named entity recognition. Pluggable backends (TextBlob / VADER / spaCy / Transformers), no forced API keys.
 
 ---
