@@ -2,6 +2,8 @@
 
 A practical Python library for common NLP tasks: text preprocessing, sentiment analysis, and named entity recognition. Pluggable backends (TextBlob / VADER / spaCy / Transformers), no forced API keys.
 
+> **Quick tip before installing:** `requirements.txt` includes `torch` and `transformers`, so a plain install may pull large wheels you don't need just to run the tests. The tests are smoke tests — `uv run --with pytest pytest tests/ -q` is enough. If you only have a CPU, install the CPU wheel first with `pip install torch --index-url https://download.pytorch.org/whl/cpu` and then the rest of the requirements. If you use the spaCy backend, remember to download its model separately (`python -m spacy download en_core_web_sm`).
+
 ---
 
 ## Modules
